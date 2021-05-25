@@ -14,10 +14,15 @@
 <li><p>原因：branch 跟 tag 有重名</p>
 </li>
 <li><p>解决方案：改掉本地的分支名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m v1.1.0 local_v1.1.0</span><br></pre></td></tr></table></figure></li>
-<li><p>相关 git 命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git branch -m 旧分支名 新分支名 </span><br><span class="line">//重命名</span><br><span class="line"></span><br><span class="line">git branch -M 旧分支名 新分支名</span><br><span class="line">//如果新分支名已存在，进行强制覆盖</span><br><span class="line"></span><br><span class="line">git branch -D 分支名</span><br><span class="line">//删除</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m v1.1.0 local_v1.1.0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>相关 git 命令：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git branch -m 旧分支名 新分支名 </span><br><span class="line">//重命名</span><br><span class="line"></span><br><span class="line">git branch -M 旧分支名 新分支名</span><br><span class="line">//如果新分支名已存在，进行强制覆盖</span><br><span class="line"></span><br><span class="line">git branch -D 分支名</span><br><span class="line">//删除</span><br></pre></td></tr></table></figure>
+
 <h3 id="git-revert-和-git-reset-的区别"><a href="#git-revert-和-git-reset-的区别" class="headerlink" title="git revert 和 git reset 的区别"></a>git revert 和 git reset 的区别</h3><ul>
 <li>git revert 是用一次新的 commit 来回滚之前的 commit，git reset 是直接删除指定的 commit。</li>
 <li>在回滚这一操作上看，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit“中和”之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现，但是git reset是之间把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入。 </li>
@@ -34,13 +39,21 @@
 <li>分支追踪：git branch -vv</li>
 </ul>
 <h3 id="获取远程分支到本地"><a href="#获取远程分支到本地" class="headerlink" title="获取远程分支到本地"></a>获取远程分支到本地</h3><ol>
-<li>在本地新建分支 x，并自动切换到该本地分支 x。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 本地分支名x origin/远程分支名x</span><br></pre></td></tr></table></figure></li>
-<li>在本地新建分支 x，但是不会自动切换到该本地分支 x，需要手动 checkout。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin 远程分支名x:本地分支名x</span><br></pre></td></tr></table></figure></li>
+<li>在本地新建分支 x，并自动切换到该本地分支 x。</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 本地分支名x origin/远程分支名x</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在本地新建分支 x，但是不会自动切换到该本地分支 x，需要手动 checkout。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin 远程分支名x:本地分支名x</span><br></pre></td></tr></table></figure>
+
 <h3 id="设定-upstream"><a href="#设定-upstream" class="headerlink" title="设定 upstream"></a>设定 upstream</h3><ul>
 <li>-u 等同于 –set-upstream</li>
-<li>例子： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/pre_release_batch_tool_20200702</span><br></pre></td></tr></table></figure></li>
+<li>例子：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/pre_release_batch_tool_20200702</span><br></pre></td></tr></table></figure>
+
 <h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><ul>
 <li>git stash</li>
 <li>git stash list</li>
@@ -51,21 +64,16 @@
 <h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><ul>
 <li>git更新</li>
 </ul>
-<p><strong>git pull origin master</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>git上传</li>
 </ul>
-<ol>
-<li><p><strong>git add .</strong></p>
-</li>
-<li><p><strong>git commit -m “  “</strong></p>
-</li>
-<li><p><strong>git push origin master</strong></p>
-</li>
-</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line"></span><br><span class="line">git commit -m &quot;  &quot;</span><br><span class="line"></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>git终端</li>
 </ul>
-<p><strong>CTRL+C</strong> 中断</p>
-<p><strong>CTRL+D</strong> 退出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CTRL+C // 中断</span><br><span class="line"></span><br><span class="line">CTRL+D // 退出</span><br></pre></td></tr></table></figure>
+
 </div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2020/05/16/css-sheet/">千牛小程序实现表格</a><a class="next" href="/2019/02/08/Data-Structure/">排序、时间复杂度、空间复杂度</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://www.daluozha.cn"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/05/25/vue-reactive/">Vue 2.x 响应式原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/24/website/">珍藏的一些门钥匙</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Q-and-A/">工作中遇过的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/css-flex/">CSS 之 Flex 布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/css-sheet/">千牛小程序实现表格</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/21/git-learning/">Git 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/08/Data-Structure/">排序、时间复杂度、空间复杂度</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://leetcode-cn.com/" title="leetcode" target="_blank">leetcode</a><ul></ul><a href="https://juejin.cn/" title="juejin" target="_blank">juejin</a><ul></ul><a href="https://segmentfault.com/" title="segmentfault" target="_blank">segmentfault</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">- luozha -.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
